@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>سبيرات الواحة</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#f7f9f8;color:#173226}
+header{background:linear-gradient(135deg,#0d6338,#1d9b5b);color:#fff;box-shadow:0 2px 12px #0002}
+.top{max-width:1100px;margin:auto;padding:16px 18px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:24px;font-weight:900}.loc{font-size:13px;margin-top:4px;opacity:.9}
+.cart{border:0;background:#fff;color:#16834b;padding:11px 15px;border-radius:13px;font-weight:bold;cursor:pointer}
+.hero{max-width:1100px;margin:25px auto;padding:40px 22px;border-radius:25px;background:linear-gradient(135deg,#e5f7ec,#fff);text-align:center}
+.hero h1{margin:0 0 12px;font-size:32px}.hero p{color:#5b6c63}
+.badge{display:inline-block;background:#f4b942;padding:8px 14px;border-radius:20px;font-weight:bold}
+.wrap{max-width:1100px;margin:auto;padding:0 18px 45px}
+.search{width:100%;padding:15px;border:1px solid #d8e3dd;border-radius:14px;font-size:16px}
+.categories{display:flex;gap:10px;flex-wrap:wrap;padding:18px 0}
+.cat{border:1px solid #d8e3dd;background:#fff;border-radius:20px;padding:9px 15px}
+.empty{background:#fff;border-radius:20px;padding:55px 20px;text-align:center;color:#6c7b74;box-shadow:0 3px 14px #0000000d}
+.empty .icon{font-size:60px}
+footer{text-align:center;padding:25px;color:#6c7b74;font-size:13px}
+#drawer{position:fixed;inset:0;background:#0007;display:none;z-index:20}.panel{position:absolute;right:0;top:0;height:100%;width:min(440px,100%);background:#fff;padding:20px;overflow:auto}.close{float:left;border:0;background:#eee;border-radius:8px;padding:8px}.field{margin:12px 0}.field label{display:block;font-weight:bold;font-size:13px;margin-bottom:5px}.field input,.field textarea{width:100%;padding:11px;border:1px solid #d8e1dc;border-radius:10px;font-family:inherit}.order{width:100%;padding:13px;border:0;background:#16834b;color:white;border-radius:12px;font-weight:900}
+@media(max-width:600px){.hero h1{font-size:25px}.top{padding:13px}.logo{font-size:20px}}
+</style>
+</head>
+<body>
+<header><div class="top"><div><div class="logo">🛒 سبيرات الواحة</div><div class="loc">حساني عبد الكريم • ولاية الوادي</div></div><button class="cart" onclick="openCart()">🛍️ السلة</button></div></header>
+
+<section class="hero">
+<span class="badge">الدفع عند الاستلام</span>
+<h1>مرحبًا بكم في سبيرات الواحة</h1>
+<p>تسوّق بسهولة من متجرنا الإلكتروني.</p>
+<p>📞 +213 798 35 67 04</p>
+</section>
+
+<main class="wrap">
+<input class="search" placeholder="🔎 ابحث عن منتج..." disabled>
+<div class="categories">
+<button class="cat">جميع المنتجات</button>
+<button class="cat">مواد غذائية</button>
+<button class="cat">مشروبات</button>
+<button class="cat">منظفات</button>
+<button class="cat">حلويات</button>
+</div>
+<div class="empty">
+<div class="icon">🛒</div>
+<h2>المتجر قيد التجهيز</h2>
+<p>سيتم إضافة المنتجات والأسعار قريبًا.</p>
+</div>
+</main>
+
+<footer>سبيرات الواحة • حساني عبد الكريم، ولاية الوادي<br>للطلب والاستفسار: +213 798 35 67 04</footer>
+
+<div id="drawer" onclick="if(event.target.id==='drawer')closeCart()">
+<div class="panel">
+<button class="close" onclick="closeCart()">✕</button>
+<h2>🛍️ سلة المشتريات</h2>
+<p>السلة فارغة حاليًا لأن المنتجات لم تتم إضافتها بعد.</p>
+<hr>
+<h3>بيانات الطلب</h3>
+<div class="field"><label>الاسم الكامل</label><input id="name" placeholder="اكتب اسمك"></div>
+<div class="field"><label>رقم الهاتف</label><input id="phone" placeholder="05 / 06 / 07..."></div>
+<div class="field"><label>العنوان</label><textarea id="address" rows="3" placeholder="الحي، الشارع، نقطة قريبة"></textarea></div>
+<div class="field"><label>ملاحظات</label><textarea id="note" rows="2"></textarea></div>
+<button class="order" onclick="sendMessage()">تواصل معنا عبر واتساب</button>
+</div></div>
+
+<script>
+function openCart(){document.getElementById('drawer').style.display='block'}
+function closeCart(){document.getElementById('drawer').style.display='none'}
+function sendMessage(){
+const n=document.getElementById('name').value.trim(),p=document.getElementById('phone').value.trim(),a=document.getElementById('address').value.trim(),m=document.getElementById('note').value.trim();
+if(!n||!p||!a){alert('يرجى إدخال الاسم ورقم الهاتف والعنوان.');return}
+const text=`السلام عليكم، أريد الاستفسار/الطلب من سبيرات الواحة.%0Aالاسم: ${encodeURIComponent(n)}%0Aالهاتف: ${encodeURIComponent(p)}%0Aالعنوان: ${encodeURIComponent(a)}%0Aملاحظات: ${encodeURIComponent(m)}`;
+window.open('https://wa.me/213798356704?text='+text,'_blank')
+}
+</script>
+</body></html>
